@@ -1,6 +1,10 @@
 import { getPokemonByType, getPokemonByName } from "./services/api.js";
 import { createCard } from "../components/cards/card.js";
+const user = JSON.parse(localStorage.getItem("loggedUser"));
 
+if (!user) {
+  window.location.href = "../../index.html";
+}
 async function loadProfile() {
   const user = JSON.parse(localStorage.getItem("loggedUser"));
   if (!user) return;
@@ -17,9 +21,17 @@ async function loadProfile() {
     user.pokeTeam = getRandomPokemonIds(5);
   }
 
-  // Guardar
-  localStorage.setItem("loggedUser", JSON.stringify(user));
+  // Guardar loggedUser
+localStorage.setItem("loggedUser", JSON.stringify(user));
 
+//  ACTUALIZAR USERS
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+users = users.map(u => 
+  u.username === user.username ? user : u
+);
+
+localStorage.setItem("users", JSON.stringify(users));
   //  Render avatar
   const avatarPokemon = await getPokemonByName(user.avatar);
   renderPokemon(avatarPokemon);
@@ -135,6 +147,12 @@ document.getElementById("change-avatar").addEventListener("click", async () => {
   // renderizar
   const avatarPokemon = await getPokemonByName(user.avatar);
   renderPokemon(avatarPokemon);
+});
+
+//logout
+document.getElementById("logout").addEventListener("click", () => {
+  localStorage.removeItem("loggedUser");
+  window.location.href = "../../index.html";
 });
 
 loadProfile();
