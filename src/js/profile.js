@@ -1,6 +1,39 @@
 import { getPokemonByType, getPokemonByName } from "./services/api.js";
 import { createCard } from "../components/cards/card.js";
 
+async function loadProfile() {
+  const user = JSON.parse(localStorage.getItem("loggedUser"));
+  if (!user) return;
+
+  // Avatar
+  if (!user.avatar) {
+    const names = await getPokemonByType(user.pokeType);
+    const randomIndex = Math.floor(Math.random() * names.length);
+    user.avatar = names[randomIndex];
+  }
+
+  // Equipo
+  if (!user.pokeTeam || user.pokeTeam.length === 0) {
+    user.pokeTeam = getRandomPokemonIds(5);
+  }
+
+  // Guardar
+  localStorage.setItem("loggedUser", JSON.stringify(user));
+
+  //  Render avatar
+  const avatarPokemon = await getPokemonByName(user.avatar);
+  renderPokemon(avatarPokemon);
+
+  // Render equipo
+  const teamPokemons = await Promise.all(
+    user.pokeTeam.map(id => getPokemonByName(id))
+  );
+
+  renderExtraPokemons(teamPokemons);
+  console.log("USER FINAL:", user);
+}
+
+loadProfile();
 async function loadUserPokemon() {
   const user = JSON.parse(localStorage.getItem("loggedUser"));
   if (!user) return;
@@ -32,25 +65,30 @@ function renderPokemon(pokemon) {
 
   container.appendChild(card);
 }
-async function loadUserPokemons() {
-  const user = JSON.parse(localStorage.getItem("loggedUser"));
-  if (!user) return;
+function getRandomPokemonIds(count) {
+  const ids = new Set();
 
-  const type = user.pokeType;
+  while (ids.size < count) {
+    const randomId = Math.floor(Math.random() * 151) + 1;
+    ids.add(randomId);
+  }
 
-  console.log("Tipo usuario:", type);
+  return Array.from(ids);
+}
+async function loadExtraPokemons() {
+  const ids = getRandomPokemonIds(5);
 
-  const names = await getPokemonByType(type);
+  console.log("IDs random:", ids);
 
   const pokemons = await Promise.all(
-    names.map(name => getPokemonByName(name))
+    ids.map(id => getPokemonByName(id))
   );
 
-  renderPokemons(pokemons);
+  renderExtraPokemons(pokemons);
 }
 
-function renderPokemons(pokemons) {
-  const container = document.getElementById("pokemon-container");
+function renderExtraPokemons(pokemons) {
+  const container = document.getElementById("extra-pokemons");
   container.innerHTML = "";
 
   pokemons.forEach(pokemon => {
@@ -65,20 +103,41 @@ function renderPokemons(pokemons) {
     container.appendChild(card);
   });
 }
-loadUserPokemon();
-loadUserPokemons();
+document.getElementById("change-team").addEventListener("click", async () => {
+  const user = JSON.parse(localStorage.getItem("loggedUser"));
+  if (!user) return;
 
+  // nuevo equipo random
+  user.pokeTeam = getRandomPokemonIds(5);
 
-let avatar = localStorage.getItem("avatarPokemon");
+  // guardar
+  localStorage.setItem("loggedUser", JSON.stringify(user));
 
-if (!avatar) {
+  // renderizar
+  const teamPokemons = await Promise.all(
+    user.pokeTeam.map(id => getPokemonByName(id))
+  );
+
+  renderExtraPokemons(teamPokemons);
+});
+document.getElementById("change-avatar").addEventListener("click", async () => {
+  const user = JSON.parse(localStorage.getItem("loggedUser"));
+  if (!user) return;
+
+  const names = await getPokemonByType(user.pokeType);
+
   const randomIndex = Math.floor(Math.random() * names.length);
-  avatar = names[randomIndex];
-  localStorage.setItem("avatarPokemon", avatar);
-}
+  user.avatar = names[randomIndex];
 
-const pokemon = await getPokemonByName(avatar);
+  // guardar
+  localStorage.setItem("loggedUser", JSON.stringify(user));
 
+  // renderizar
+  const avatarPokemon = await getPokemonByName(user.avatar);
+  renderPokemon(avatarPokemon);
+});
+
+loadProfile();
 
 
 
