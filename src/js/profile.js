@@ -54,16 +54,27 @@ async function loadUserPokemon() {
 
   const names = await getPokemonByType(type);
 
-  // 🎲 elegir uno aleatorio
+  // elegir uno aleatorio
   const randomIndex = Math.floor(Math.random() * names.length);
   const randomName = names[randomIndex];
 
   console.log("Pokemon elegido:", randomName);
 
-  // 🔥 solo uno
+  // solo uno
   const pokemon = await getPokemonByName(randomName);
 
   renderPokemon(pokemon);
+  // Guardar loggedUser
+localStorage.setItem("loggedUser", JSON.stringify(user));
+
+//  ACTUALIZAR USERS
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+users = users.map(u => 
+  u.username === user.username ? user : u
+);
+
+localStorage.setItem("users", JSON.stringify(users));
 }
 function renderPokemon(pokemon) {
   const container = document.getElementById("pokemon-container");
@@ -115,23 +126,36 @@ function renderExtraPokemons(pokemons) {
     container.appendChild(card);
   });
 }
-document.getElementById("change-team").addEventListener("click", async () => {
-  const user = JSON.parse(localStorage.getItem("loggedUser"));
-  if (!user) return;
+const changeTeamBtn = document.getElementById("change-team");
 
-  // nuevo equipo random
-  user.pokeTeam = getRandomPokemonIds(5);
+if (changeTeamBtn) {
+  changeTeamBtn.addEventListener("click", async () => {
+    const user = JSON.parse(localStorage.getItem("loggedUser"));
+    if (!user) return;
 
-  // guardar
-  localStorage.setItem("loggedUser", JSON.stringify(user));
+    // nuevo equipo
+    user.pokeTeam = getRandomPokemonIds(5);
 
-  // renderizar
-  const teamPokemons = await Promise.all(
-    user.pokeTeam.map(id => getPokemonByName(id))
-  );
+    // guardar loggedUser
+    localStorage.setItem("loggedUser", JSON.stringify(user));
 
-  renderExtraPokemons(teamPokemons);
-});
+    // 🔥 ACTUALIZAR USERS (FALTABA ESTO)
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    users = users.map(u =>
+      u.username === user.username ? user : u
+    );
+
+    localStorage.setItem("users", JSON.stringify(users));
+
+    // renderizar
+    const teamPokemons = await Promise.all(
+      user.pokeTeam.map(id => getPokemonByName(id))
+    );
+
+    renderExtraPokemons(teamPokemons);
+  });
+}
 document.getElementById("change-avatar").addEventListener("click", async () => {
   const user = JSON.parse(localStorage.getItem("loggedUser"));
   if (!user) return;
@@ -147,6 +171,18 @@ document.getElementById("change-avatar").addEventListener("click", async () => {
   // renderizar
   const avatarPokemon = await getPokemonByName(user.avatar);
   renderPokemon(avatarPokemon);
+
+  // después de cambiar user.avatar
+
+localStorage.setItem("loggedUser", JSON.stringify(user));
+
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+users = users.map(u => 
+  u.username === user.username ? user : u
+);
+
+localStorage.setItem("users", JSON.stringify(users));
 });
 
 //logout

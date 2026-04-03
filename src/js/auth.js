@@ -1,5 +1,5 @@
 import { User } from "./models/user.js";
-
+import { getPokemonByType } from "./services/api.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -54,31 +54,46 @@ function login() {
 }
 
 
-function register() {
-    const newUser=document.getElementById("newUser").value;
-    const newPass=document.getElementById("newPass").value;
+async function register() {
+    const newUser = document.getElementById("newUser").value;
+    const newPass = document.getElementById("newPass").value;
     const pokeType = document.getElementById("pokeType").value;
 
-       if (newUser === "" || newPass === "" || pokeType === "") {
-    document.getElementById("message").textContent = "Rellena todos los campos";
-    return;
+    if (newUser === "" || newPass === "" || pokeType === "") {
+        document.getElementById("message").textContent = "Rellena todos los campos";
+        return;
     }
-     // Obtener usuarios existentes o array vacío
+
     let users = JSON.parse(localStorage.getItem("users")) || [];
 
-    // Crear nuevo usuario
+    // Crear usuario
     const user = new User(newUser, newPass, pokeType);
 
-    // Añadir al array
-    users.push(user);
+    // 🔥 GENERAR AVATAR
+    const names = await getPokemonByType(pokeType);
+    const randomIndex = Math.floor(Math.random() * names.length);
+    user.avatar = names[randomIndex];
 
-    // Guardar array
+    // 🔥 GENERAR EQUIPO
+    user.pokeTeam = getRandomPokemonIds(5);
+
+    // Guardar en users
+    users.push(user);
     localStorage.setItem("users", JSON.stringify(users));
 
-    localStorage.setItem("user", JSON.stringify(user));
-
+    // Guardar sesión
     localStorage.setItem("loggedUser", JSON.stringify(user));
-    
-    window.location.href = "../profile/profile.html";
 
+    window.location.href = "../profile/profile.html";
+}
+
+function getRandomPokemonIds(count) {
+    const ids = new Set();
+
+    while (ids.size < count) {
+        const randomId = Math.floor(Math.random() * 151) + 1;
+        ids.add(randomId);
     }
+
+    return Array.from(ids);
+}
