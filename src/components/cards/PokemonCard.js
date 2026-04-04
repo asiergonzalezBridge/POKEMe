@@ -7,13 +7,16 @@ export class PokemonCard extends Card {
   }
 
   render() {
-    const card = super.render();
+  const card = super.render();
 
-    const typeEl = document.createElement("p");
-    typeEl.textContent = `Type: ${this.type}`;
+  // añadir clase por tipo
+  card.classList.add(`type-${this.type}`);
 
-    card.appendChild(typeEl);
+  const typeEl = document.createElement("p");
+  typeEl.textContent = `Type: ${this.type}`;
 
-    return card;
-  }
+  card.appendChild(typeEl);
+
+  return card;
+}
 }

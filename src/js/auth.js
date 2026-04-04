@@ -22,7 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (loginBtn) {
         loginBtn.addEventListener("click", login);
     }
-
+    // TO REGISTER
+    const toRegisterBtn = document.getElementById("toRegisterBtn");
+    if (toRegisterBtn) {
+        toRegisterBtn.addEventListener("click", () => {
+            window.location.href = "./pages/auth/auth.html";
+        });
+    }
     // REGISTER
     const registerBtn = document.getElementById("registerBtn");
     if (registerBtn) {

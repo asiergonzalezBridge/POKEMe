@@ -3,20 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MiPerfil</title>
+     <link rel="stylesheet" href="../../styles/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <h2>TU INICIAL</h2>
-    <div id="pokemon-container"></div>
-    <button id="change-avatar">Cambiar Avatar</button>
+<div id="pokemon-container"></div>
+<button id="change-avatar" class="poke-btn">
+  <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" class="poke-icon">
+  Cambiar Avatar
+</button>
 
-    <h2>TU EQUIPO</h2>
-    <div id="extra-pokemons"></div>
-    <script type="module" src="../../js/profile.js"></script>
-    <button id="change-team">Cambiar Equipo</button>
-    <div id="stats"></div>
+<h2>TU EQUIPO</h2>
+<div id="extra-pokemons"></div>
+
+<button id="change-team" class="poke-btn">
+  <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" class="poke-icon">
+  Cambiar Equipo
+</button>
+
+<div id="stats"></div>
+
+<script type="module" src="../../js/profile.js"></script>
+    
 
     <h2>LOGOUT</h2>
-    <button id="logout">Cerrar Sesión</button>
+    <button id="logout" class="poke-btn">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" class="poke-icon">
+      Cerrar Sesión
+    </button>
 </body>
 </html>
