@@ -56,32 +56,56 @@ function login() {
 
 async function register() {
     const newUser = document.getElementById("newUser").value;
+    const email = document.getElementById("email").value;
     const newPass = document.getElementById("newPass").value;
+    const repeatPass = document.getElementById("repeatPass").value;
     const pokeType = document.getElementById("pokeType").value;
 
-    if (newUser === "" || newPass === "" || pokeType === "") {
-        document.getElementById("message").textContent = "Rellena todos los campos";
+    const message = document.getElementById("message");
+
+    // VALIDACIONES
+
+    if (!newUser || !email || !newPass || !repeatPass || !pokeType) {
+        message.textContent = "Rellena todos los campos";
+        return;
+    }
+
+    // Email válido (simple)
+    if (!email.includes("@") || !email.includes(".")) {
+        message.textContent = "Email no válido";
+        return;
+    }
+
+    // Contraseñas iguales
+    if (newPass !== repeatPass) {
+        message.textContent = "Las contraseñas no coinciden";
         return;
     }
 
     let users = JSON.parse(localStorage.getItem("users")) || [];
 
+    // Usuario ya existe
+    const userExists = users.some(u => u.username === newUser);
+    if (userExists) {
+        message.textContent = "El usuario ya existe";
+        return;
+    }
+
     // Crear usuario
     const user = new User(newUser, newPass, pokeType);
+    user.email = email;
 
-    // 🔥 GENERAR AVATAR
+    // Avatar
     const names = await getPokemonByType(pokeType);
     const randomIndex = Math.floor(Math.random() * names.length);
     user.avatar = names[randomIndex];
 
-    // 🔥 GENERAR EQUIPO
+    // 🔥 Equipo
     user.pokeTeam = getRandomPokemonIds(5);
 
-    // Guardar en users
+    // Guardar
     users.push(user);
     localStorage.setItem("users", JSON.stringify(users));
-
-    // Guardar sesión
     localStorage.setItem("loggedUser", JSON.stringify(user));
 
     window.location.href = "../profile/profile.html";
