@@ -1,25 +1,18 @@
-export function createCard({ name, image, type }) {
-  // Contenedor principal
-  const card = document.createElement("div");
-  card.classList.add("pokemon-card");
+export class Card {
+  constructor(name, image) {
+    this.name = name;
+    this.image = image;
+  }
 
-  // Imagen
-  const img = document.createElement("img");
-  img.src = image;
-  img.alt = name;
+  render() {
+    const div = document.createElement("div");
+    div.classList.add("pokemon-card");
 
-  // Nombre
-  const title = document.createElement("h3");
-  title.textContent = name;
+    div.innerHTML = `
+      <img src="${this.image}" />
+      <h3>${this.name}</h3>
+    `;
 
-  // Tipo
-  const typeText = document.createElement("p");
-  typeText.textContent = `Tipo: ${type}`;
-
-  // Añadir todo a la card
-  card.appendChild(img);
-  card.appendChild(title);
-  card.appendChild(typeText);
-
-  return card;
+    return div;
+  }
 }

@@ -1,5 +1,5 @@
 import { getPokemonByType, getPokemonByName } from "./services/api.js";
-import { createCard } from "../components/cards/card.js";
+import { createCard } from "../components/cards/createCard.js";
 const user = JSON.parse(localStorage.getItem("loggedUser"));
 
 if (!user) {
@@ -13,7 +13,9 @@ async function loadProfile() {
   if (!user.avatar) {
     const names = await getPokemonByType(user.pokeType);
     const randomIndex = Math.floor(Math.random() * names.length);
-    user.avatar = names[randomIndex];
+    if (!names[randomIndex] || !names[randomIndex].pokemon) return;
+
+    user.avatar = names[randomIndex].pokemon.name;
   }
 
   // Equipo
@@ -33,8 +35,19 @@ users = users.map(u =>
 
 localStorage.setItem("users", JSON.stringify(users));
   //  Render avatar
-  const avatarPokemon = await getPokemonByName(user.avatar);
-  renderPokemon(avatarPokemon);
+  if (!user.avatar || typeof user.avatar !== "string") {
+  console.error("Avatar inválido:", user.avatar);
+  return;
+}
+
+const avatarPokemon = await getPokemonByName(user.avatar);
+
+if (!avatarPokemon) {
+  console.error("Pokemon no encontrado:", user.avatar);
+  return;
+}
+
+renderPokemon(avatarPokemon);
 
   // Render equipo
   const teamPokemons = await Promise.all(
@@ -43,6 +56,7 @@ localStorage.setItem("users", JSON.stringify(users));
 
   renderExtraPokemons(teamPokemons);
   console.log("USER FINAL:", user);
+  renderStats(teamPokemons);
 }
 
 loadProfile();
@@ -126,6 +140,23 @@ function renderExtraPokemons(pokemons) {
     container.appendChild(card);
   });
 }
+function renderStats(team) {
+  const container = document.getElementById("stats");
+  container.innerHTML = "";
+
+  const stats = {};
+
+  team.forEach(p => {
+    const type = p.types[0].type.name;
+    stats[type] = (stats[type] || 0) + 1;
+  });
+
+  for (let type in stats) {
+    const div = document.createElement("div");
+    div.textContent = `${type}: ${stats[type]}`;
+    container.appendChild(div);
+  }
+}
 const changeTeamBtn = document.getElementById("change-team");
 
 if (changeTeamBtn) {
@@ -154,6 +185,7 @@ if (changeTeamBtn) {
     );
 
     renderExtraPokemons(teamPokemons);
+    renderStats(teamPokemons);
   });
 }
 document.getElementById("change-avatar").addEventListener("click", async () => {
@@ -169,8 +201,19 @@ document.getElementById("change-avatar").addEventListener("click", async () => {
   localStorage.setItem("loggedUser", JSON.stringify(user));
 
   // renderizar
-  const avatarPokemon = await getPokemonByName(user.avatar);
-  renderPokemon(avatarPokemon);
+  if (!user.avatar || typeof user.avatar !== "string") {
+  console.error("Avatar inválido:", user.avatar);
+  return;
+}
+
+const avatarPokemon = await getPokemonByName(user.avatar);
+
+if (!avatarPokemon) {
+  console.error("Pokemon no encontrado:", user.avatar);
+  return;
+}
+
+renderPokemon(avatarPokemon);
 
   // después de cambiar user.avatar
 

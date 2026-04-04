@@ -92,8 +92,14 @@ async function register() {
     }
 
     // Crear usuario
-    const user = new User(newUser, newPass, pokeType);
-    user.email = email;
+    const user = new User(
+    newUser,
+    newPass,
+    email,
+    pokeType,
+    null,
+    []
+    );
 
     // Avatar
     const names = await getPokemonByType(pokeType);
