@@ -32,7 +32,7 @@ export function syncUser(user) {
   let users = getUsers();
 
   users = users.map(u =>
-    u.username === user.username ? user : u
+      u.id === user.id ? user : u
   );
 
   saveUsers(users);

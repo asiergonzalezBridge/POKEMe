@@ -66,6 +66,18 @@ button:hover {
 .pokemon-card h3 {
   text-transform: capitalize;
 }
+.avatar-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #ffcb05; /* amarillo pokemon */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #2a75bb;
+}
 #pokemon-container {
   display: flex;
   justify-content: center;

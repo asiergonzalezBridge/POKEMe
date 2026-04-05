@@ -91,7 +91,7 @@ async function register() {
     let users = getUsers();
 
     // Usuario ya existe
-    const userExists = users.some(u => u.username === newUser);
+    const userExists = users.some(u => u.username === newUser.trim());
     if (userExists) {
         message.textContent = "El usuario ya existe";
         return;

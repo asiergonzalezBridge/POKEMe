@@ -1,6 +1,7 @@
 import { getPokemonByType, getPokemonByName } from "./services/api.js";
 import { createCard } from "../components/cards/createCard.js";
 import { getLoggedUser, syncUser, logout as storageLogout } from "../infrastructure/storageManager.js";
+import { initButtons } from "../components/buttons/buttons.js";
 const user = getLoggedUser();
 
 if (!user) {
@@ -139,63 +140,11 @@ function renderStats(team) {
     container.appendChild(div);
   }
 }
-const changeTeamBtn = document.getElementById("change-team");
+loadProfile();
 
-if (changeTeamBtn) {
-  changeTeamBtn.addEventListener("click", async () => {
-    const user = getLoggedUser();
-    if (!user) return;
-
-    user.pokeTeam = getRandomPokemonIds(5);
-    syncUser(user);
-
-    const teamPokemons = await Promise.all(
-      user.pokeTeam.map(id => getPokemonByName(id))
-    );
-
-    renderExtraPokemons(teamPokemons);
-    renderStats(teamPokemons);
-  });
-}
-document.getElementById("change-avatar").addEventListener("click", async () => {
- const user = getLoggedUser();
-  if (!user) return;
-
-  const names = await getPokemonByType(user.pokeType);
-
-  const randomIndex = Math.floor(Math.random() * names.length);
-  user.avatar = names[randomIndex];
-
-  // guardar
-  user.avatar = names[randomIndex];
-
-  // renderizar
-  if (!user.avatar || typeof user.avatar !== "string") {
-  console.error("Avatar inválido:", user.avatar);
-  return;
-}
-
-const avatarPokemon = await getPokemonByName(user.avatar);
-
-if (!avatarPokemon) {
-  console.error("Pokemon no encontrado:", user.avatar);
-  return;
-}
-
-renderPokemon(avatarPokemon);
-
-  // después de cambiar user.avatar
-user.avatar = names[randomIndex];
-syncUser(user);
+initButtons({
+  renderAvatar: renderPokemon,
+  renderTeam: renderExtraPokemons,
+  renderStats: renderStats,
+  generateRandomTeam: () => getRandomPokemonIds(5)
 });
-
-
-//logout
-const logoutBtn = document.getElementById("logout");
-
-if (logoutBtn) {
-  logoutBtn.addEventListener("click", () => {
-    storageLogout();
-    window.location.href = "../../index.html";
-  });
-}
