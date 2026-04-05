@@ -1,12 +1,13 @@
 import { getPokemonByType, getPokemonByName } from "./services/api.js";
 import { createCard } from "../components/cards/createCard.js";
-const user = JSON.parse(localStorage.getItem("loggedUser"));
+import { getLoggedUser, syncUser, logout as storageLogout } from "../infrastructure/storageManager.js";
+const user = getLoggedUser();
 
 if (!user) {
   window.location.href = "../../index.html";
 }
 async function loadProfile() {
-  const user = JSON.parse(localStorage.getItem("loggedUser"));
+ const user = getLoggedUser();
   if (!user) return;
 
   // Avatar
@@ -22,18 +23,8 @@ async function loadProfile() {
   if (!user.pokeTeam || user.pokeTeam.length === 0) {
     user.pokeTeam = getRandomPokemonIds(5);
   }
-
-  // Guardar loggedUser
-localStorage.setItem("loggedUser", JSON.stringify(user));
-
-//  ACTUALIZAR USERS
-let users = JSON.parse(localStorage.getItem("users")) || [];
-
-users = users.map(u => 
-  u.username === user.username ? user : u
-);
-
-localStorage.setItem("users", JSON.stringify(users));
+  syncUser(user);
+  
   //  Render avatar
   if (!user.avatar || typeof user.avatar !== "string") {
   console.error("Avatar inválido:", user.avatar);
@@ -61,7 +52,7 @@ renderPokemon(avatarPokemon);
 
 loadProfile();
 async function loadUserPokemon() {
-  const user = JSON.parse(localStorage.getItem("loggedUser"));
+ const user = getLoggedUser();
   if (!user) return;
 
   const type = user.pokeType;
@@ -78,17 +69,8 @@ async function loadUserPokemon() {
   const pokemon = await getPokemonByName(randomName);
 
   renderPokemon(pokemon);
-  // Guardar loggedUser
-localStorage.setItem("loggedUser", JSON.stringify(user));
-
-//  ACTUALIZAR USERS
-let users = JSON.parse(localStorage.getItem("users")) || [];
-
-users = users.map(u => 
-  u.username === user.username ? user : u
-);
-
-localStorage.setItem("users", JSON.stringify(users));
+  
+  syncUser(user);
 }
 function renderPokemon(pokemon) {
   const container = document.getElementById("pokemon-container");
@@ -161,25 +143,12 @@ const changeTeamBtn = document.getElementById("change-team");
 
 if (changeTeamBtn) {
   changeTeamBtn.addEventListener("click", async () => {
-    const user = JSON.parse(localStorage.getItem("loggedUser"));
+    const user = getLoggedUser();
     if (!user) return;
 
-    // nuevo equipo
     user.pokeTeam = getRandomPokemonIds(5);
+    syncUser(user);
 
-    // guardar loggedUser
-    localStorage.setItem("loggedUser", JSON.stringify(user));
-
-    // 🔥 ACTUALIZAR USERS (FALTABA ESTO)
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-
-    users = users.map(u =>
-      u.username === user.username ? user : u
-    );
-
-    localStorage.setItem("users", JSON.stringify(users));
-
-    // renderizar
     const teamPokemons = await Promise.all(
       user.pokeTeam.map(id => getPokemonByName(id))
     );
@@ -189,7 +158,7 @@ if (changeTeamBtn) {
   });
 }
 document.getElementById("change-avatar").addEventListener("click", async () => {
-  const user = JSON.parse(localStorage.getItem("loggedUser"));
+ const user = getLoggedUser();
   if (!user) return;
 
   const names = await getPokemonByType(user.pokeType);
@@ -198,7 +167,7 @@ document.getElementById("change-avatar").addEventListener("click", async () => {
   user.avatar = names[randomIndex];
 
   // guardar
-  localStorage.setItem("loggedUser", JSON.stringify(user));
+  user.avatar = names[randomIndex];
 
   // renderizar
   if (!user.avatar || typeof user.avatar !== "string") {
@@ -216,25 +185,17 @@ if (!avatarPokemon) {
 renderPokemon(avatarPokemon);
 
   // después de cambiar user.avatar
-
-localStorage.setItem("loggedUser", JSON.stringify(user));
-
-let users = JSON.parse(localStorage.getItem("users")) || [];
-
-users = users.map(u => 
-  u.username === user.username ? user : u
-);
-
-localStorage.setItem("users", JSON.stringify(users));
+user.avatar = names[randomIndex];
+syncUser(user);
 });
+
 
 //logout
-document.getElementById("logout").addEventListener("click", () => {
-  localStorage.removeItem("loggedUser");
-  window.location.href = "../../index.html";
-});
+const logoutBtn = document.getElementById("logout");
 
-loadProfile();
-
-
-
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", () => {
+    storageLogout();
+    window.location.href = "../../index.html";
+  });
+}

@@ -1,9 +1,10 @@
 import { User } from "./models/user.js";
 import { getPokemonByType } from "./services/api.js";
-
+import { getUsers, saveUsers, setLoggedUser, logout as storageLogout } from "../infrastructure/storageManager.js";
+import { getLoggedUser } from "../infrastructure/storageManager.js";
 document.addEventListener("DOMContentLoaded", () => {
 
-    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+  const loggedUser = getLoggedUser();
 
     const message = document.getElementById("message");
     if (loggedUser && message) {
@@ -38,27 +39,26 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function logout() {
-    localStorage.removeItem("loggedUser");
+    storageLogout();
     document.getElementById("message").textContent = "Sesión cerrada";
 }
 
+
 function login() {
     const username = document.getElementById("username").value;
-    const password= document.getElementById("password").value;
+    const password = document.getElementById("password").value;
 
-      let users = JSON.parse(localStorage.getItem("users")) || [];
+    let users = getUsers();
 
-    // Buscar usuario
     const foundUser = users.find(user => user.username === username);
 
     if (foundUser && foundUser.password === password) {
-        localStorage.setItem("loggedUser", JSON.stringify(foundUser));
-        window.location.href = "./pages/profile/profile.html";
+        setLoggedUser(foundUser);
+        window.location.href = "./pages/dashboard/dashboard.html";
     } else {
         document.getElementById("message").textContent = "Invalid username or password.";
     }
 }
-
 
 async function register() {
     const newUser = document.getElementById("newUser").value;
@@ -88,7 +88,7 @@ async function register() {
         return;
     }
 
-    let users = JSON.parse(localStorage.getItem("users")) || [];
+    let users = getUsers();
 
     // Usuario ya existe
     const userExists = users.some(u => u.username === newUser);
@@ -112,15 +112,15 @@ async function register() {
     const randomIndex = Math.floor(Math.random() * names.length);
     user.avatar = names[randomIndex];
 
-    // 🔥 Equipo
+    // Equipo
     user.pokeTeam = getRandomPokemonIds(5);
 
     // Guardar
     users.push(user);
-    localStorage.setItem("users", JSON.stringify(users));
-    localStorage.setItem("loggedUser", JSON.stringify(user));
+    saveUsers(users);
+    setLoggedUser(user);
 
-    window.location.href = "../profile/profile.html";
+    window.location.href = "../dashboard/dashboard.html";
 }
 
 function getRandomPokemonIds(count) {
