@@ -48,21 +48,5 @@ export function initButtons({ renderAvatar, renderTeam, renderStats, generateRan
     });
   }
 
-  // LOGOUT
-  const logoutBtn = document.getElementById("logout");
-
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", () => {
-      storageLogout();
-      window.location.href = "../../index.html";
-    });
-  }
-  // GO TO PROFILE
-const profileBtn = document.getElementById("go-profile");
-
-if (profileBtn) {
-  profileBtn.addEventListener("click", () => {
-    window.location.href = "../../pages/profile/profile.html";
-  });
-}
+ 
 }

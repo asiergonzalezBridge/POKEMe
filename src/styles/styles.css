@@ -5,12 +5,16 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #e0f7fa, #fffde7);
-}
-h1, h2{
+  margin: 0;
   font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(to bottom, #cfd9df, #e2ebf0);
 }
+h2 {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 28px;
+}
+
 header {
   text-align: center;
   padding: 20px;
@@ -22,7 +26,7 @@ header h1 {
   text-shadow: 3px 3px #2a75bb;
 }
 main {
-  max-width: 900px;
+  max-width: 1200px;
   margin: auto;
   padding: 20px;
 }
@@ -33,18 +37,7 @@ main {
   text-shadow: 2px 2px #2a75bb;
   text-align: center;
 }
-button {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 8px;
-  background-color: #ffcb05;
-  cursor: pointer;
-  font-weight: bold;
-}
 
-button:hover {
-  background-color: #f2b807;
-}
 .pokemon-card {
   background: white;
   border-radius: 10px;
@@ -78,6 +71,35 @@ button:hover {
   font-weight: bold;
   color: #2a75bb;
 }
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2a75bb;
+  color: white;
+  padding: 10px 20px;
+}
+
+.logo {
+  font-family: 'PocketMonk', sans-serif;
+}
+
+.app-header button {
+  margin-left: 10px;
+  padding: 5px 10px;
+}
+
+.user-name {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.app-footer {
+  text-align: center;
+  padding: 10px;
+  background: #eee;
+  margin-top: 20px;
+}
 #pokemon-container {
   display: flex;
   justify-content: center;
@@ -89,8 +111,10 @@ button:hover {
 }
 #extra-pokemons {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  justify-items: center;
+  margin-top: 20px;
 }
 
 #stats {
@@ -112,21 +136,41 @@ button:hover {
   border-radius: 8px;
   border: 1px solid #ccc;
 }
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffcb05;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #f2b807;
+}
+.active-btn {
+  background: #2a75bb;
+  color: white;
+  transform: scale(1.05);
+  pointer-events: none; /*no se puede clicar */
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
 .poke-btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-
-  padding: 10px 16px;
+  background: #ffcb05;
   border: none;
+  padding: 10px 20px;
   border-radius: 25px;
-
-  background: linear-gradient(135deg, #ffcb05, #f2b807);
-  color: #2a75bb;
   font-weight: bold;
-
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: 0.2s;
+}
+.button-center {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .poke-btn:hover {

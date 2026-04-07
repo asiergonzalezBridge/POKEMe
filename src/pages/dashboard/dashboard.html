@@ -8,31 +8,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <button id="go-profile" class="poke-btn">Perfil</button>
-    <h2>TU INICIAL</h2>
-<div id="pokemon-container"></div>
-<button id="change-avatar" class="poke-btn">
-  <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" class="poke-icon">
-  Cambiar Avatar
-</button>
+  <div id="header"></div>
 
-<h2>TU EQUIPO</h2>
-<div id="extra-pokemons"></div>
+  <main>
 
-<button id="change-team" class="poke-btn">
-  <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" class="poke-icon">
-  Cambiar Equipo
-</button>
+  <h2>TU INICIAL</h2>
+  <div id="pokemon-container"></div>
 
-<div id="stats"></div>
-
-<script type="module" src="../../js/dashboard.js"></script>
-    
-
-    <h2>LOGOUT</h2>
-    <button id="logout" class="poke-btn">
+  <div class="button-center">
+    <button id="change-avatar" class="poke-btn">
       <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" class="poke-icon">
-      Cerrar Sesión
-    </button>
+      Cambiar Avatar</button>
+  </div>
+
+  <h2>TU EQUIPO</h2>
+  <div id="extra-pokemons"></div>
+
+  <div class="button-center">
+    <button id="change-team" class="poke-btn"> 
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" class="poke-icon">
+    Cambiar Equipo</button>
+  </div>
+
+  </main>
+
+  <div id="footer"></div>
+    <script type="module" src="../../js/dashboard.js"></script>
 </body>
 </html>

@@ -2,6 +2,22 @@ import { getPokemonByType, getPokemonByName } from "./services/api.js";
 import { createCard } from "../components/cards/createCard.js";
 import { getLoggedUser, syncUser, logout as storageLogout } from "../infrastructure/storageManager.js";
 import { initButtons } from "../components/buttons/buttons.js";
+import { renderHeader } from "../components/header/header.js";
+import { renderFooter } from "../components/footer/footer.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderHeader("dashboard");
+  renderFooter();
+
+  loadProfile();
+
+  initButtons({
+    renderAvatar: renderPokemon,
+    renderTeam: renderExtraPokemons,
+    renderStats: renderStats,
+    generateRandomTeam: () => getRandomPokemonIds(5)
+  });
+});
 const user = getLoggedUser();
 
 if (!user) {
@@ -51,28 +67,8 @@ renderPokemon(avatarPokemon);
   renderStats(teamPokemons);
 }
 
-loadProfile();
-async function loadUserPokemon() {
- const user = getLoggedUser();
-  if (!user) return;
 
-  const type = user.pokeType;
 
-  const names = await getPokemonByType(type);
-
-  // elegir uno aleatorio
-  const randomIndex = Math.floor(Math.random() * names.length);
-  const randomName = names[randomIndex];
-
-  console.log("Pokemon elegido:", randomName);
-
-  // solo uno
-  const pokemon = await getPokemonByName(randomName);
-
-  renderPokemon(pokemon);
-  
-  syncUser(user);
-}
 function renderPokemon(pokemon) {
   const container = document.getElementById("pokemon-container");
   container.innerHTML = "";
@@ -140,11 +136,4 @@ function renderStats(team) {
     container.appendChild(div);
   }
 }
-loadProfile();
 
-initButtons({
-  renderAvatar: renderPokemon,
-  renderTeam: renderExtraPokemons,
-  renderStats: renderStats,
-  generateRandomTeam: () => getRandomPokemonIds(5)
-});

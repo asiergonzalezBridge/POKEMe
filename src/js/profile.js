@@ -1,6 +1,22 @@
 import { getLoggedUser, syncUser, getUsers } from "../infrastructure/storageManager.js";
 import { getPokemonByName } from "../js/services/api.js";
 import { initButtons } from "../components/buttons/buttons.js";
+import { renderHeader } from "../components/header/header.js";
+import { renderFooter } from "../components/footer/footer.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderHeader("profile");
+  renderFooter();
+
+  initProfile();
+
+  const backBtn = document.getElementById("back-dashboard");
+  if (backBtn) {
+    backBtn.addEventListener("click", () => {
+      window.location.href = "../dashboard/dashboard.html";
+    });
+  }
+});
 // Usuario seguro
 function getUserOrRedirect() {
   const user = getLoggedUser();
@@ -115,8 +131,5 @@ document.getElementById("back-dashboard").addEventListener("click", () => {
   window.location.href = "../dashboard/dashboard.html";
 });
 
-initProfile();
-initButtons({
-  renderStats: renderStats,
-  generateRandomTeam: () => getRandomPokemonIds(5)
-});
+
+
