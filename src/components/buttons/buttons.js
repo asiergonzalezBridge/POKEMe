@@ -19,7 +19,6 @@ export function initButtons({ renderAvatar, renderTeam, renderStats, generateRan
       );
 
       renderTeam(teamPokemons);
-      renderStats(teamPokemons);
     });
   }
 

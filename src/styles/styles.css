@@ -14,7 +14,27 @@ h2 {
   text-align: center;
   font-size: 28px;
 }
+.landing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+}
 
+.auth-box {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-box input {
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+.landing-main {
+  text-align: center;
+  margin-top: 80px;
+}
 header {
   text-align: center;
   padding: 20px;
@@ -36,6 +56,33 @@ main {
   color: #ffcb05;
   text-shadow: 2px 2px #2a75bb;
   text-align: center;
+}
+.pokemon-animation {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.pokemon-animation img {
+  width: 100px;
+  animation: float 2s infinite ease-in-out;
+}
+
+/* cada uno con delay */
+.pokemon-animation img:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.pokemon-animation img:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+/* animación */
+@keyframes float {
+  0% { transform: translateX(0px); }
+  50% { transform: translateX(-15px); }
+  100% { transform: translateX(0px); }
 }
 
 .pokemon-card {
@@ -59,23 +106,25 @@ main {
 .pokemon-card h3 {
   text-transform: capitalize;
 }
-.avatar-circle {
-  width: 80px;
-  height: 80px;
+.avatar-pokemon {
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  background-color: #ffcb05; /* amarillo pokemon */
+  background: linear-gradient(to bottom, #cfd9df, #e2ebf0);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
-  font-weight: bold;
-  color: #2a75bb;
+  margin: 15px auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.avatar-pokemon img {
+  width: 80px;
 }
 .app-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #2a75bb;
+  background: #4b545c;
   color: white;
   padding: 10px 20px;
 }
@@ -99,6 +148,80 @@ main {
   padding: 10px;
   background: #eee;
   margin-top: 20px;
+}
+.profile-header {
+  position: relative;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.edit-container {
+  position: absolute;
+  top: 0;
+  right: 20px;
+}
+
+.small {
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.hidden {
+  display: none;
+}
+.stats-container {
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.stat-row {
+  margin-bottom: 15px;
+}
+
+.stat-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.bar {
+  height: 12px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.6s ease;
+}
+
+/* COLORES POR TIPO */
+.bar-fill.normal { background: #999999; }
+.bar-fill.fire { background: #ff4d4d; }
+.bar-fill.water { background: #4da6ff; }
+.bar-fill.electric { background: #ffd633; }
+.bar-fill.grass { background: #66cc66; }
+.bar-fill.ice { background: #66ffff; }
+.bar-fill.fighting { background: #cc3300; }
+.bar-fill.poison { background: #cc66ff; }
+.bar-fill.ground { background: #cc9966; }
+.bar-fill.flying { background: #99ccff; }
+.bar-fill.psychic { background: #ff66b3; }
+.bar-fill.bug { background: #99cc00; }
+.bar-fill.rock { background: #bfbfbf; }
+.bar-fill.ghost { background: #666699; }
+.bar-fill.dragon { background: #6633ff; }
+
+/* STATS */
+.bar-fill.stat {
+  background: #2a75bb;
+}
+
+#edit-box {
+  margin-top: 5px;
 }
 #pokemon-container {
   display: flex;
@@ -180,85 +303,133 @@ button:hover {
 .poke-icon {
   width: 20px;
 }
-
-
-.type-fire {
-  background: #f08030;
+.card {
+  width: 220px;
+  padding: 15px;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #e3350d, #cc0000);
   color: white;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  transition: 0.3s;
 }
 
-.type-water {
-  background: #6890f0;
-  color: white;
+.card:hover {
+  transform: translateY(-8px);
 }
 
-.type-grass {
-  background: #78c850;
-  color: white;
+.card-header {
+  font-size: 12px;
+  text-align: right;
+  opacity: 0.8;
 }
 
-.type-electric {
-  background: #f8d030;
+.card-image img {
+  width: 100px;
 }
 
-.type-psychic {
-  background: #f85888;
-  color: white;
+.card-name {
+  text-transform: capitalize;
+  margin: 10px 0 5px;
 }
 
-.type-ice {
-  background: #98d8d8;
+.card-type {
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: uppercase;
 }
 
-.type-dragon {
-  background: #7038f8;
-  color: white;
+/* STATS */
+
+.stats {
+  margin-top: 10px;
 }
 
-.type-dark {
-  background: #705848;
-  color: white;
+.stat {
+  margin-bottom: 8px;
+  text-align: left;
 }
 
-.type-fairy {
-  background: #ee99ac;
+.stat span {
+  font-size: 12px;
 }
 
-.type-normal {
-  background: #a8a878;
+.bar {
+  height: 6px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 5px;
+  overflow: hidden;
 }
 
-.type-fighting {
-  background: #c03028;
-  color: white;
+.bar div {
+  height: 100%;
+  background: white;
 }
 
-.type-flying {
-  background: #a890f0;
+.card.fire {
+  background: linear-gradient(145deg, #ff4d4d, #cc0000);
 }
 
-.type-poison {
-  background: #a040a0;
-  color: white;
+.card.water {
+  background: linear-gradient(145deg, #4da6ff, #0059b3);
 }
 
-.type-ground {
-  background: #e0c068;
+.card.grass {
+  background: linear-gradient(145deg, #66cc66, #2d862d);
 }
 
-.type-rock {
-  background: #b8a038;
+.card.electric {
+  background: linear-gradient(145deg, #ffdb4d, #e6b800);
 }
 
-.type-bug {
-  background: #a8b820;
+.card.ice {
+  background: linear-gradient(145deg, #b3ecff, #66d9ff);
 }
 
-.type-ghost {
-  background: #705898;
-  color: white;
+.card.fighting {
+  background: linear-gradient(145deg, #cc3300, #802000);
 }
 
-.type-steel {
-  background: #b8b8d0;
+.card.poison {
+  background: linear-gradient(145deg, #9933cc, #660099);
+}
+
+.card.ground {
+  background: linear-gradient(145deg, #cc9966, #996633);
+}
+
+.card.flying {
+  background: linear-gradient(145deg, #9999ff, #6666cc);
+}
+
+.card.psychic {
+  background: linear-gradient(145deg, #ff66b3, #cc0066);
+}
+
+.card.bug {
+  background: linear-gradient(145deg, #99cc00, #669900);
+}
+
+.card.rock {
+  background: linear-gradient(145deg, #bfbfbf, #808080);
+}
+
+.card.ghost {
+  background: linear-gradient(145deg, #666699, #333366);
+}
+
+.card.dragon {
+  background: linear-gradient(145deg, #6633ff, #330099);
+}
+
+.card.dark {
+  background: linear-gradient(145deg, #4d4d4d, #1a1a1a);
+}
+
+.card.steel {
+  background: linear-gradient(145deg, #cccccc, #808080);
+}
+
+.card.fairy {
+  background: linear-gradient(145deg, #ffb3e6, #ff66cc);
 }

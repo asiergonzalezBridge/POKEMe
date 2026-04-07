@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initButtons({
     renderAvatar: renderPokemon,
     renderTeam: renderExtraPokemons,
-    renderStats: renderStats,
+    
     generateRandomTeam: () => getRandomPokemonIds(5)
   });
 });
@@ -64,7 +64,7 @@ renderPokemon(avatarPokemon);
 
   renderExtraPokemons(teamPokemons);
   console.log("USER FINAL:", user);
-  renderStats(teamPokemons);
+
 }
 
 
@@ -73,12 +73,7 @@ function renderPokemon(pokemon) {
   const container = document.getElementById("pokemon-container");
   container.innerHTML = "";
 
-  const card = createCard({
-    name: pokemon.name,
-    image: pokemon.sprites.front_default,
-    type: pokemon.types[0].type.name
-  });
-
+  const card = createCard(pokemon);
   container.appendChild(card);
 }
 function getRandomPokemonIds(count) {
@@ -107,33 +102,12 @@ function renderExtraPokemons(pokemons) {
   const container = document.getElementById("extra-pokemons");
   container.innerHTML = "";
 
-  pokemons.forEach(pokemon => {
-    if (!pokemon) return;
+      pokemons.forEach(pokemon => {
+      if (!pokemon) return;
 
-    const card = createCard({
-      name: pokemon.name,
-      image: pokemon.sprites.front_default,
-      type: pokemon.types[0].type.name
+      const card = createCard(pokemon); // ✅
+
+      container.appendChild(card);
     });
-
-    container.appendChild(card);
-  });
-}
-function renderStats(team) {
-  const container = document.getElementById("stats");
-  container.innerHTML = "";
-
-  const stats = {};
-
-  team.forEach(p => {
-    const type = p.types[0].type.name;
-    stats[type] = (stats[type] || 0) + 1;
-  });
-
-  for (let type in stats) {
-    const div = document.createElement("div");
-    div.textContent = `${type}: ${stats[type]}`;
-    container.appendChild(div);
-  }
-}
+    }
 

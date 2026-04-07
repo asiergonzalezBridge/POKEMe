@@ -6,24 +6,31 @@
     <title>Home</title>
     <link rel="stylesheet" href="./styles/styles.css">
     <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-                
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">       
 </head>
 <body>
-    <div id="header"></div>
-    <h1 class="title">POKEMe</h1>
-    <h2>Login</h2>
-<input type="text" id="username" placeholder="usuario">
-<input type="password" id="password" placeholder="contraseña"> 
-<button id="loginBtn">Login</button>
-<button id="toRegisterBtn">Registrarme</button>
-<p id="message"></p>
-<div id="footer"></div>
 
+<header class="landing-header">
+  <h1 class="logo">POKEMe</h1>
 
+  <div class="auth-box">
+    <input type="text" id="username" placeholder="Usuario">
+    <input type="password" id="password" placeholder="Contraseña">
+    <button id="loginBtn" class="poke-btn">Login</button>
+    <button id="toRegisterBtn" class="poke-btn">Registro</button>
+  </div>
+</header>
 
+<main class="landing-main">
+  <div class="pokemon-animation">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png">
+  </div>
 
-
-<script type="module" src="js/auth.js"></script>  
+  <h2>Elige tu aventura Pokémon</h2>
+    <div id="footer"></div>
+    <script type="module" src="js/auth.js"></script>  
+    
 </body>
 </html>
