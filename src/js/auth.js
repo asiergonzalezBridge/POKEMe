@@ -2,6 +2,7 @@ import { User } from "./models/user.js";
 import { getPokemonByType } from "./services/api.js";
 import { getUsers, saveUsers, setLoggedUser, logout as storageLogout } from "../infrastructure/storageManager.js";
 import { getLoggedUser } from "../infrastructure/storageManager.js";
+import { getPokemonByName } from "./services/api.js";
 document.addEventListener("DOMContentLoaded", () => {
 
   const loggedUser = getLoggedUser();
@@ -35,6 +36,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (registerBtn) {
         registerBtn.addEventListener("click", register);
     }
+    const backBtn = document.getElementById("back-login");
+
+if (backBtn) {
+  backBtn.addEventListener("click", () => {
+    window.location.href = "../../index.html";
+  });
+}
+    loadRandomPokemon()
 
 });
 
@@ -132,4 +141,16 @@ function getRandomPokemonIds(count) {
     }
 
     return Array.from(ids);
+}
+async function loadRandomPokemon() {
+  const img = document.getElementById("pokemon-image");
+  if (!img) return;
+
+  const randomId = Math.floor(Math.random() * 151) + 1;
+
+  const pokemon = await getPokemonByName(randomId);
+
+  if (!pokemon) return;
+
+  img.src = pokemon.sprites.front_default;
 }

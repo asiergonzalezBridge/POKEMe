@@ -8,23 +8,45 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="header"></div>
-    <h2>Registro</h2>
-<input type ="text" id="newUser" placeholder="nuevo usuario">
-<input type="email" id="email" placeholder="correo electrónico">
-<input type ="password" id ="newPass" placeholder = "nueva contraseña">
-<input type ="password" id ="repeatPass" placeholder = "confirmar contraseña">
-<select id="pokeType">
-    <option value="">Selecciona tipo</option>
-    <option value="fire">Fuego</option>
-    <option value="water">Agua</option>
-    <option value="grass">Planta</option>
-    <option value="electric">Eléctrico</option>
-</select>
-<button id="registerBtn">Registro</button>
-<p id="message"></p>
+
+<div id="header"></div>
+
+<main class="auth-container">
+
+  <h2>Registro</h2>
+   
+    <div class="pikachu-container">
+    <img id="pokemon-image">
+    </div>
+
+  <div class="form-box">
+    <input type="text" id="newUser" placeholder="Nuevo usuario">
+    <input type="email" id="email" placeholder="Correo electrónico">
+    <input type="password" id="newPass" placeholder="Nueva contraseña">
+    <input type="password" id="repeatPass" placeholder="Confirmar contraseña">
+
+    <select id="pokeType">
+      <option value="">Selecciona tipo</option>
+      <option value="fire">🔥 Fuego</option>
+      <option value="water">💧 Agua</option>
+      <option value="grass">🌿 Planta</option>
+      <option value="electric">⚡ Eléctrico</option>
+    </select>
+
+    <button id="registerBtn" class="poke-btn">Registro</button>
+     <p id="message"></p>
+     <button id="back-login" class="link-btn">Volver al login</button>
+  </div>
+    <div class="pikachu-container">
+    <img id="pokemon-image">
+    </div>
+ 
+
+</main>
+
 <div id="footer"></div>
 
 <script type="module" src="../../js/auth.js"></script>
+
 </body>
 </html>
