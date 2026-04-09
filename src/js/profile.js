@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderFooter();
 
   initProfile();
+
   const backBtn = document.getElementById("back-dashboard");
   if (backBtn) {
     backBtn.addEventListener("click", () => {
@@ -16,30 +17,36 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-// Usuario seguro
+
+// ======================
+// UTILIDADES
+// ======================
+
 function getUserOrRedirect() {
   const user = getLoggedUser();
+
   if (!user) {
     window.location.href = "../index.html";
     return null;
   }
+
   return user;
 }
 
-// Username
+// ======================
+// RENDER
+// ======================
+
 function renderUsername(user) {
   document.getElementById("username-display").textContent = user.username;
 }
 
-// Avatar inicial
 async function renderAvatar(user) {
   const container = document.getElementById("initial-avatar");
   if (!container) return;
-
   if (!user.avatar) return;
 
   const pokemon = await getPokemonByName(user.avatar);
-
   if (!pokemon) return;
 
   container.innerHTML = `
@@ -49,7 +56,6 @@ async function renderAvatar(user) {
   `;
 }
 
-// Stats equipo
 function renderTypeStats(team) {
   const container = document.getElementById("type-stats");
   if (!container) return;
@@ -85,6 +91,7 @@ function renderTypeStats(team) {
     container.appendChild(row);
   }
 }
+
 function renderTeamStats(team) {
   const container = document.getElementById("team-stats");
   if (!container) return;
@@ -111,7 +118,7 @@ function renderTeamStats(team) {
 
   for (let stat in avg) {
     const value = avg[stat];
-    const percentage = (value / 150) * 100; // escala aprox
+    const percentage = (value / 150) * 100;
 
     const row = document.createElement("div");
     row.classList.add("stat-row");
@@ -130,7 +137,6 @@ function renderTeamStats(team) {
   }
 }
 
-// Render completo
 async function renderUser(user) {
   renderUsername(user);
   await renderAvatar(user);
@@ -143,6 +149,10 @@ async function renderUser(user) {
   renderTeamStats(teamPokemons);
 }
 
+// ======================
+// EDIT USERNAME
+// ======================
+
 function initEditUsername() {
   const editBtn = document.getElementById("edit-username");
   const saveBtn = document.getElementById("save-username");
@@ -151,12 +161,10 @@ function initEditUsername() {
 
   if (!editBtn || !saveBtn) return;
 
-  // mostrar input
   editBtn.addEventListener("click", () => {
     editBox.classList.toggle("hidden");
   });
 
-  // guardar
   saveBtn.addEventListener("click", () => {
     const user = getUserOrRedirect();
     if (!user) return;
@@ -195,26 +203,23 @@ function initEditUsername() {
   });
 }
 
+// ======================
 // INIT
+// ======================
+
 async function initProfile() {
   const user = getUserOrRedirect();
   if (!user) return;
+
   initEditUsername();
   await renderUser(user);
+
+  // DEBUG (esto sobra en producción)
   const teamPokemons = await Promise.all(
-  user.pokeTeam.map(id => getPokemonByName(id))
-);
+    user.pokeTeam.map(id => getPokemonByName(id))
+  );
 
-console.log("TEAM:", teamPokemons); // 👈 DEBUG
+  console.log("TEAM:", teamPokemons);
 
-renderTypeStats(teamPokemons);
-renderTeamStats(teamPokemons);
-  
+
 }
-
-document.getElementById("back-dashboard").addEventListener("click", () => {
-  window.location.href = "../dashboard/dashboard.html";
-});
-
-
-

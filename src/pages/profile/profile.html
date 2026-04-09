@@ -1,39 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MiPerfil</title>
-     <link rel="stylesheet" href="../../styles/styles.css">
+
+    
+    <link rel="stylesheet" href="../../styles/styles.css">
+
+    
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-  
-  <div class="profile-header">
-  <div id="initial-avatar"></div>
-  <h2 id="username-display"></h2>
 
-  <div class="edit-container">
-    <button id="edit-username" class="poke-btn small">✏️</button>
+    
+    <div class="profile-header">
 
-    <div id="edit-box" class="hidden">
-      <input type="text" id="new-username" placeholder="Nuevo nombre" />
-      <button id="save-username" class="poke-btn small">✔</button>
+        <div id="initial-avatar"></div>
+        <h2 id="username-display"></h2>
+
+        <div class="edit-container">
+
+            <button id="edit-username" class="poke-btn small">✏️</button>
+
+            <div id="edit-box" class="hidden">
+                <input type="text" id="new-username" placeholder="Nuevo nombre">
+                <button id="save-username" class="poke-btn small">✔</button>
+            </div>
+
+            <p id="message"></p>
+
+        </div>
     </div>
-    <p id="message"></p>
-  </div>
-</div>
 
+    
     <h3>Tipos del equipo</h3>
-<div id="type-stats" class="stats-container"></div>
+    <div id="type-stats" class="stats-container"></div>
 
-<h3>Estadísticas del equipo</h3>
-<div id="team-stats" class="stats-container"></div>
+    
+    <h3>Estadísticas del equipo</h3>
+    <div id="team-stats" class="stats-container"></div>
 
-   
+    
     <button id="back-dashboard" class="poke-btn">Volver</button>
-  
+
+    
     <div id="footer"></div>
+
+    
     <script type="module" src="../../js/profile.js"></script>
+
 </body>
+
 </html>
