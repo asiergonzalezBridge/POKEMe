@@ -42,7 +42,7 @@ main {
 
 .landing-main {
   text-align: center;
-  margin-top: 80px;
+  margin-top: 30px;
 }
 
 header {
@@ -75,7 +75,7 @@ header h1 {
     gap: 15px;
     text-align: center;
   }
-   .auth-container,{
+   .auth-container{
     margin: 40px auto;
     padding: 0 15px;
   }
@@ -173,7 +173,7 @@ button:hover {
   margin-top: 15px;
   background: none;
   border: none;
-  color: #2a75bb;
+  color:black;
   font-weight: bold;
   cursor: pointer;
 }
@@ -195,7 +195,7 @@ button:hover {
   border: none;
   font-weight: bold;
   cursor: pointer;
-  color: white;
+  color: black;
   transition: 0.2s;
   white-space: nowrap;
 }
@@ -205,6 +205,27 @@ button:hover {
 }
 
 .poke-btn:hover {
+  transform: scale(1.05);
+}
+.pokegame-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  color: whitesmoke;
+  transition: 0.2s;
+  white-space: nowrap;
+}
+
+.pokegame-btn:hover {
+  transform: scale(1.1);
+}
+
+.pokegame-btn:hover {
   transform: scale(1.05);
 }
 
@@ -482,6 +503,25 @@ button:hover {
   50% { transform: translateY(-15px); }
   100% { transform: translateY(0px); }
 }
+.player {
+  animation: floatPlayer 2s infinite ease-in-out;
+}
+
+.enemy {
+  animation: floatEnemy 2s infinite ease-in-out;
+}
+
+@keyframes floatPlayer {
+  0% { transform: scale(1.1) translateY(0); }
+  50% { transform: scale(1.1) translateY(-5px); }
+  100% { transform: scale(1.1) translateY(0); }
+}
+
+@keyframes floatEnemy {
+  0% { transform: scale(0.95) translateY(0); }
+  50% { transform: scale(0.95) translateY(-5px); }
+  100% { transform: scale(0.95) translateY(0); }
+}
 
 
 /* ======================
@@ -554,7 +594,7 @@ button:hover {
 .oracle .poke-btn {
   margin-top: 15px;
   background: #ffcb05;
-  color: #2a75bb;
+  color: black;
   font-weight: bold;
 }
 
@@ -579,6 +619,59 @@ button:hover {
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+/* ======================
+   BATTLE
+====================== */
+
+.battle {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+  /* fondo tipo combate */
+  background: linear-gradient(to top, #2f3438, #6b737a);
+  position: relative;
+}
+  
+
+/* sombras tipo suelo */
+.battle::before,
+.battle::after {
+  content: "";
+  position: absolute;
+  bottom: 25px;
+  width: 80px;
+  height: 15px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 50%;
+  box-shadow: 0 0 40px rgba(0,0,0,0.1);
+}
+
+.battle::before {
+  left: 60px;
+}
+
+.battle::after {
+  right: 60px;
+}
+
+/* jugador (más cerca) */
+.player {
+  width: 130px;
+  transform: scale(1.1);
+}
+
+/* enemigo (más lejos) */
+.enemy {
+  width: 110px;
+  transform: scale(0.95);
 }
 
 
@@ -665,25 +758,25 @@ button:hover {
 .card.fairy { background: linear-gradient(145deg, #ffb3e6, #ff66cc); }
 
 /* botones */
-.poke-btn.fire { background: #ff4d4d; }
-.poke-btn.water { background: #4da6ff; }
-.poke-btn.grass { background: #66cc66; }
-.poke-btn.electric { background: #ffd633; }
-.poke-btn.psychic { background: #ff66b3; }
-.poke-btn.ice { background: #66ffff; }
-.poke-btn.dragon { background: #6633ff; }
-.poke-btn.dark { background: #333333; }
-.poke-btn.fairy { background: #ff99cc; }
+.pokegame-btn.fire { background: #ff4d4d; }
+.pokegame-btn.water { background: #4da6ff; }
+.pokegame-btn.grass { background: #66cc66; }
+.pokegame-btn.electric { background: #ffd633; }
+.pokegame-btn.psychic { background: #ff66b3; }
+.pokegame-btn.ice { background: #66ffff; }
+.pokegame-btn.dragon { background: #6633ff; }
+.pokegame-btn.dark { background: #333333; }
+.pokegame-btn.fairy { background: #ff99cc; }
 
-.poke-btn.normal { background: #999999; }
-.poke-btn.fighting { background: #cc3300; }
-.poke-btn.poison { background: #cc66ff; }
-.poke-btn.ground { background: #cc9966; }
-.poke-btn.flying { background: #99ccff; }
-.poke-btn.bug { background: #99cc00; }
-.poke-btn.rock { background: #bfbfbf; }
-.poke-btn.ghost { background: #666699; }
-.poke-btn.steel { background: #cccccc; color: black; }
+.pokegame-btn.normal { background: #999999; }
+.pokegame-btn.fighting { background: #cc3300; }
+.pokegame-btn.poison { background: #cc66ff; }
+.pokegame-btn.ground { background: #cc9966; }
+.pokegame-btn.flying { background: #99ccff; }
+.pokegame-btn.bug { background: #99cc00; }
+.pokegame-btn.rock { background: #bfbfbf; }
+.pokegame-btn.ghost { background: #666699; }
+.pokegame-btn.steel { background: #cccccc; color: black; }
 
 /* enemigos */
 .enemy-type.fire { background: #ff4d4d; }

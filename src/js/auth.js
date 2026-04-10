@@ -111,7 +111,7 @@ function login() {
     } else {
         // Mostrar error
         document.getElementById("message").textContent =
-            "Invalid username or password.";
+            "usuario o contraseña incorrectos";
     }
 }
 

@@ -185,7 +185,7 @@ function playPoketypes() {
         <span>${type}</span>
       `;
 
-      btn.classList.add("poke-btn", type);
+      btn.classList.add("pokegame-btn", type);
       btn.addEventListener("click", () => checkAnswer(type));
 
       container.appendChild(btn);
