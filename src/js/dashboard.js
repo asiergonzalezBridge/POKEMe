@@ -212,7 +212,7 @@ function playPoketypes() {
     }
 
     streakDisplay.textContent = `Racha: ${streak}`;
-    streakDisplay.style.color = streak >= 5 ? "gold" : "black";
+    streakDisplay.style.color = streak >= 5 ? "#b8860b" : "black";
   }
 
   generateEnemy();

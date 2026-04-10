@@ -26,7 +26,7 @@ function getUserOrRedirect() {
   const user = getLoggedUser();
 
   if (!user) {
-    window.location.href = "../index.html";
+    window.location.href = "../../../index.html";
     return null;
   }
 

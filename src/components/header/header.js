@@ -54,7 +54,7 @@ function initHeaderEvents() {
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
       storageLogout();
-      window.location.href = "../../index.html";
+      window.location.href = "../../../index.html";
     });
   }
 }

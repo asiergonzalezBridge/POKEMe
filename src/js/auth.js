@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const toRegisterBtn = document.getElementById("toRegisterBtn");
     if (toRegisterBtn) {
         toRegisterBtn.addEventListener("click", () => {
-            window.location.href = "./pages/auth/auth.html";
+            window.location.href = "./src/pages/auth/auth.html";
         });
     }
 
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const backBtn = document.getElementById("back-login");
     if (backBtn) {
         backBtn.addEventListener("click", () => {
-            window.location.href = "../../index.html";
+            window.location.href = "../../../index.html";
         });
     }
 
@@ -106,7 +106,7 @@ function login() {
         setLoggedUser(foundUser);
 
         // Redirigir al dashboard
-        window.location.href = "./pages/dashboard/dashboard.html";
+        window.location.href = "./src/pages/dashboard/dashboard.html";
 
     } else {
         // Mostrar error
