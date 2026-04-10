@@ -1,0 +1,199 @@
+# 📘 MEMORIA TÉCNICA – POKEMe
+
+
+
+1. Objetivo del proyecto
+
+El objetivo de este proyecto es desarrollar una aplicación web interactiva utilizando JavaScript, aplicando:
+
+* Programación Orientada a Objetos
+* Manipulación del DOM
+* Consumo de APIs externas
+
+Además, se busca crear una experiencia de usuario dinámica y funcional basada en el mundo Pokémon.
+
+
+ 2. Arquitectura y diseño
+
+🔹 Modelo de datos (POO)
+
+Se ha implementado una estructura basada en objetos para representar usuarios:
+
+* Clase `User`
+
+  * username
+  * password
+  * email
+  * pokeType
+  * avatar
+  * pokeTeam
+
+Se utiliza composición para añadir funcionalidades como:
+
+* Avatar automático
+* Equipo dinámico
+
+
+
+🔹 Flujo de la aplicación
+
+1. Registro:
+
+   * Validación de datos
+   * Guardado en localStorage
+
+2. Login:
+
+   * Comprobación de credenciales
+   * Creación de sesión
+
+3. Perfil:
+
+   * Carga de datos del usuario
+   * Obtención de Pokémon desde API
+   * Renderizado dinámico
+
+
+
+3. Diseño e interfaz
+
+Decisiones tomadas:
+
+* Estilo visual inspirado en Pokémon
+* Uso de fuentes temáticas pero legibles
+* Botones personalizados (pokeball)
+* Diseño responsive
+
+Problemas solucionados:
+
+* Márgenes y espaciado (header, formularios)
+* Responsividad del layout
+* Mejora visual del combate Pokémon
+
+
+
+4. Consumo de API
+
+Se ha utilizado la API:
+
+* PokeAPI
+
+Funcionalidades implementadas:
+
+* Obtener Pokémon por tipo
+* Obtener datos individuales
+* Mostrar sprites en la interfaz
+
+Uso de:
+
+```js
+fetch()
+async/await
+```
+
+---
+
+5. Manipulación del DOM
+
+Se han implementado:
+
+* Creación dinámica de tarjetas Pokémon
+
+* Eventos de botones:
+
+  * Login
+  * Registro
+  * Cambio de avatar
+  * Cambio de equipo
+
+* Actualización sin recargar página
+
+
+
+6. Persistencia de datos
+
+Se utiliza `localStorage` para:
+
+* Guardar usuarios
+* Mantener sesión iniciada
+* Guardar preferencias (avatar, equipo)
+
+Ejemplo:
+
+```js
+localStorage.setItem("loggedUser", JSON.stringify(user))
+```
+
+---
+
+7. Validaciones y control de errores
+
+Se han implementado:
+
+* Email válido
+* Contraseñas iguales
+* Usuario existente
+* Mensajes de error:
+
+  * Usuario no encontrado
+  * Contraseña incorrecta
+
+---
+
+8. Gestión del trabajo
+
+El desarrollo se ha realizado de forma progresiva:
+
+1. Estructura del proyecto
+2. Sistema de autenticación
+3. Persistencia
+4. Integración con API
+5. Diseño visual
+6. Mejora UX/UI
+
+Uso de:
+
+* Git (ramas feature, merge a dev)
+
+---
+
+9. Problemas encontrados
+
+Problemas:
+
+* Errores con rutas de archivos
+* Fallos en localStorage (JSON mal parseado)
+* Renderizado incompleto
+* Problemas de responsive
+
+Soluciones:
+
+* Reorganización de carpetas
+* Validación de datos antes de parsear
+* Refactorización del código
+* Ajustes CSS
+
+
+
+10. Conclusiones
+
+El proyecto cumple con los objetivos principales:
+
+✔ Uso de POO
+✔ Manipulación del DOM
+✔ Consumo de API
+✔ Persistencia de datos
+
+Además, se ha conseguido una aplicación funcional, escalable y con buena base para futuras mejoras.
+
+
+
+11. Mejoras futuras
+
+* Backend real (Node.js + DB)
+* Sistema de combates
+* Ranking de usuarios
+* Animaciones
+* Modo oscuro
+
+
