@@ -419,10 +419,15 @@ button:hover {
 .search-box {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 10px;
-  margin: 20px;
+  margin: 20px auto;
+  flex-wrap: wrap;
 }
-
+.search-box input {
+  width: 250px;
+  text-align: center;
+}
 #search-result {
   display: flex;
   justify-content: center;
