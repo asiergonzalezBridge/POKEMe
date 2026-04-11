@@ -416,6 +416,18 @@ button:hover {
 .bar-fill.stat {
   background: #2a75bb;
 }
+.search-box {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px;
+}
+
+#search-result {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 
 
 /* ======================

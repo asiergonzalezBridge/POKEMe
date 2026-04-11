@@ -3,12 +3,17 @@ import { getPokemonByName } from "../js/services/api.js";
 import { initButtons } from "../components/buttons/buttons.js";
 import { renderHeader } from "../components/header/header.js";
 import { renderFooter } from "../components/footer/footer.js";
-
+import { createCard } from "../components/cards/createCard.js";
 document.addEventListener("DOMContentLoaded", () => {
   renderHeader("profile");
   renderFooter();
 
   initProfile();
+  const searchBtn = document.getElementById("search-btn");
+
+  if (searchBtn) {
+  searchBtn.addEventListener("click", handleSearch);
+  }
 
   const backBtn = document.getElementById("back-dashboard");
   if (backBtn) {
@@ -201,6 +206,48 @@ function initEditUsername() {
     editBox.classList.add("hidden");
     input.value = "";
   });
+}
+// ======================
+// SEARCH POKEMON
+// ======================
+async function handleSearch() {
+  const input = document.getElementById("search-pokemon");
+  const resultContainer = document.getElementById("search-result");
+
+  const name = input.value.trim().toLowerCase();
+
+  resultContainer.innerHTML = "";
+
+  if (!name) {
+    resultContainer.textContent = "Introduce un nombre";
+    return;
+  }
+
+  const pokemon = await getPokemonByName(name);
+
+  if (!pokemon) {
+    resultContainer.textContent = "Pokémon no encontrado";
+    return;
+  }
+
+  renderSearchResult(pokemon);
+}
+function renderSearchResult(pokemon) {
+  const container = document.getElementById("search-result");
+
+  container.innerHTML = "";
+
+  const card = createCard(pokemon);
+
+  const addBtn = card.querySelector(".add-btn");
+
+  if (addBtn) {
+    addBtn.addEventListener("click", () => {
+      console.log("Añadir:", pokemon.name);
+    });
+  }
+
+  container.appendChild(card);
 }
 
 // ======================
