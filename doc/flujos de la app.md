@@ -73,7 +73,7 @@
    ↓
 [Perfil actualizado]
 
-DIAGRAMA DE PERSISTENCIA
+---DIAGRAMA DE PERSISTENCIA---
 
 [Usuario realiza acción]
    ↓

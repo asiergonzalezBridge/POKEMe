@@ -2,7 +2,7 @@
 
 ## 📌 Descripción
 
-POKEMe es una aplicación web interactiva desarrollada en JavaScript que permite a los usuarios registrarse, iniciar sesión y gestionar su perfil Pokémon.
+POKEMe es una aplicación web interactiva desarrollada en JavaScript que permite a los usuarios registrarse, iniciar sesión y gestionar su perfil Pokémon,ademas de incluir diferentes minijuegos.
 Cada usuario puede tener un Pokémon inicial basado en su tipo favorito y crear su propio equipo utilizando datos obtenidos desde una API externa.
 
 ---

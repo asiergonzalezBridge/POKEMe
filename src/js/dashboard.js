@@ -175,7 +175,7 @@ function playPoketypes() {
 
   function renderButtons() {
     const container = document.getElementById("type-buttons");
-    container.innerHTML = ""; // importante
+    container.innerHTML = ""; 
 
     types.forEach(type => {
       const btn = document.createElement("button");
