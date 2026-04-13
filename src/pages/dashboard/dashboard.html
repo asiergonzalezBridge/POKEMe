@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiPerfil</title>
+
+    
+    <link rel="stylesheet" href="../../styles/styles.css">
+
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  
+    <div id="header"></div>
+
+    <main>
+
+        <!-- INICIAL -->
+        <h2>TU INICIAL</h2>
+        <div id="pokemon-container"></div>
+
+        <div class="button-center">
+            <button id="change-avatar" class="poke-btn">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" class="poke-icon">
+                Cambiar Inicial
+            </button>
+        </div>
+
+        <!-- EQUIPO -->
+        <h2>TU EQUIPO</h2>
+        <div id="extra-pokemons"></div>
+
+        <div class="button-center">
+            <button id="change-team" class="poke-btn">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" class="poke-icon">
+                Cambiar Equipo
+            </button>
+        </div>
+
+        <!-- GAME -->
+        <div class="game-container">
+
+            <h2>Sala de entrenamiento</h2>
+
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/68.png" class="enemy">
+
+            <p id="streak">Racha: 0</p>
+
+            <div id="enemy-display"></div>
+            <div id="type-buttons"></div>
+
+            <p id="result"></p>
+
+        </div>
+
+        <!-- ORÁCULO -->
+        <div class="oracle">
+
+            <h2>Pregunta a la vidente</h2>
+
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/124.png" class="enemy">
+
+            <input type="text" id="question" placeholder="¿Quieres conocer el futuro?">
+
+            <button id="ask-btn" class="poke-btn">Consultar</button>
+
+            <p id="answer"></p>
+
+        </div>
+
+    </main>
+
+    
+    <div id="footer"></div>
+
+    
+    <script type="module" src="../../js/dashboard.js"></script>
+
+</body>
+
+</html>

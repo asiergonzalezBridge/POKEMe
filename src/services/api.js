@@ -1,1 +1,0 @@
-//aqui ira toda la lógica de las peticiones a la api, para que el código de los componentes sea más limpio y fácil de mantener

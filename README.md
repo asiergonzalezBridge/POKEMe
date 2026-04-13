@@ -2,185 +2,109 @@
 
 ## 📌 Descripción
 
-**POKEMe** es una aplicación web frontend desarrollada en JavaScript que permite a los usuarios crear su propio equipo Pokémon personalizado.
-
-El usuario comienza seleccionando un tipo de Pokémon, lo que genera un avatar aleatorio basado en ese tipo. A partir de ahí, puede buscar Pokémon mediante una API externa, filtrarlos y añadirlos a su equipo personal, el cual se guarda en el navegador usando `localStorage`.
-
----
-
-## 🎯 Objetivo del proyecto
-
-Aplicar conceptos clave de desarrollo frontend:
-
-* Programación Orientada a Objetos (POO)
-* Manipulación dinámica del DOM
-* Consumo de APIs externas
-* Gestión de datos en el navegador (localStorage)
+POKEMe es una aplicación web interactiva desarrollada en JavaScript que permite a los usuarios registrarse, iniciar sesión y gestionar su perfil Pokémon,ademas de incluir diferentes minijuegos.
+Cada usuario puede tener un Pokémon inicial basado en su tipo favorito y crear su propio equipo utilizando datos obtenidos desde una API externa.
 
 ---
 
-## ⚙️ Tecnologías utilizadas
+## 🚀 Funcionalidades principales
+
+* 🔐 Registro e inicio de sesión (simulado con localStorage)
+* 👤 Perfil de usuario con:
+
+  * Pokémon inicial
+  * Equipo personalizado
+* 🔄 Cambio de avatar y equipo dinámicamente
+* 🌐 Consumo de API (PokeAPI)
+* 🎨 Interfaz dinámica y responsive
+* 💾 Persistencia de datos en localStorage
+* ⚠️ Validación de formularios (email, contraseña, errores)
+
+---
+
+## 🛠️ Tecnologías utilizadas
 
 * HTML5
 * CSS3
-* JavaScript (ES6+)
-* API externa: [PokéAPI](https://pokeapi.co/)
+* JavaScript (ES Modules)
+* API externa: PokeAPI
 * LocalStorage
+* Git / GitHub
 
 ---
 
-## 🚀 Instalación y ejecución
+## 📦 Instalación y uso
 
-1. Clona el repositorio:
+1. Clonar el repositorio:
 
 ```bash
-git clone https://github.com/tu-usuario/pokeme.git
+git clone https://github.com/asiergonzalezBridge/POKEMe.git
 ```
 
-2. Accede al proyecto:
+2. Entrar en la carpeta del proyecto:
 
 ```bash
-cd pokeme
+cd POKEMe
 ```
 
-3. Abre el archivo `index.html` en tu navegador:
+3. Abrir con Live Server o similar:
 
-```bash
-start index.html
-```
-
-*(o doble clic directamente sobre el archivo)*
+* VSCode → botón derecho → "Open with Live Server"
 
 ---
 
-## 🧠 Funcionamiento de la aplicación
+## 📱 Uso de la aplicación
 
-### 🔐 Registro (simulado)
+1. Registrarse con:
 
-* El usuario selecciona un tipo de Pokémon (fuego, agua, planta…)
-* Se genera un avatar aleatorio de ese tipo
-* Los datos se guardan en `localStorage`
+   * Usuario
+   * Email válido
+   * Contraseña
+   * Tipo Pokémon
 
----
+2. Iniciar sesión
 
-### 🔎 Búsqueda y filtrado
+3. Acceder al perfil:
 
-* Búsqueda de Pokémon por nombre
-* Filtrado por tipo
-* Datos obtenidos desde PokéAPI mediante `fetch`
-
----
-
-### 🧑‍🤝‍🧑 Gestión del equipo
-
-* Añadir Pokémon al equipo
-* Eliminar Pokémon
-* Límite de equipo (máx. 6 Pokémon)
-* Persistencia mediante `localStorage`
+   * Ver tu Pokémon inicial
+   * Cambiar avatar
+   * Crear equipo
 
 ---
 
-### 👤 Perfil
-
-* Visualización del avatar
-* Posibilidad de cambiar avatar (mismo tipo)
-
----
-
-### 🎮 Minijuegos (opcional)
-
-* Piedra, papel o tijera (tipo Pokémon: fuego, agua, planta)
-* Juego de adivinación (tipo “bola mágica”)
-
----
-
-## 🔄 Flujo de usuario
-
-### Caso 1: Nuevo usuario
-
-1. Accede a la aplicación
-2. Selecciona tipo de Pokémon
-3. Se genera avatar aleatorio
-4. Accede al dashboard
-5. Busca y añade Pokémon a su equipo
-
----
-
-### Caso 2: Usuario existente
-
-1. Accede a la aplicación
-2. Se carga su equipo desde `localStorage`
-3. Puede gestionar su equipo o cambiar avatar
-
----
-
-## 🧱 Estructura del proyecto
+## 📂 Estructura del proyecto
 
 ```
-src/
+POKEMe/
 │
-├── app.js
+├── index.html
+├── src/
+│   ├── js/
+│   │   ├── services/ (API)
+│   │   ├── models/ (User)
+│   │   ├── pages/ (auth, profile)
+│   │   ├── components/
+│   │
+│   ├── styles/
+│
 ├── assets/
-├── components/
-├── infrastructure/
-├── models/
-├── pages/
-├── services/
-└── styles/
+└── README.md
 ```
 
 ---
 
-## 🧩 Arquitectura
+## ⚙️ Mejoras futuras
 
-La aplicación sigue una arquitectura modular:
-
-* **models/** → Clases (POO)
-* **services/** → Lógica de APIs
-* **components/** → Elementos UI reutilizables
-* **pages/** → Vistas de la aplicación
-* **infrastructure/** → Gestión de almacenamiento (localStorage)
-* **app.js** → Controlador principal
-
----
-
-## 💾 Persistencia de datos
-
-Se utiliza `localStorage` para:
-
-* Guardar usuario
-* Guardar equipo Pokémon
-
----
-
-## 📊 Funcionalidades principales
-
-* Registro de usuario (simulado)
-* Generación de avatar aleatorio
-* Búsqueda de Pokémon
-* Filtros por tipo
-* Gestión de equipo
-* Persistencia de datos
-* Interfaz dinámica sin recarga de página
-
----
-
-## 🔮 Mejoras futuras
-
+* Autenticación real con backend
+* Guardado en base de datos
+* Modo oscuro
 * Combates Pokémon
-* Sistema de medallas
-* Exportación de equipo
-* Modo oscuro 🌙
-* Más minijuegos
+* Ranking de usuarios
 
 ---
 
 ## 👨‍💻 Autor
 
-Proyecto desarrollado como práctica individual del módulo de desarrollo web.
+* Asier González
 
 ---
-
-## 📄 Licencia
-
-Uso educativo.
